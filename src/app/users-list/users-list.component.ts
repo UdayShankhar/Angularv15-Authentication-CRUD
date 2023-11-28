@@ -66,7 +66,7 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  editUser(user: any): void {
+  editUser(user: User): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       width: '500px',
       data: { user, type: 'editUser' },
@@ -83,7 +83,7 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  deleteUser(user: any): void {
+  deleteUser(user: User): void {
     const dialogRef = this.dialog.open(DeleteUserConfirmationComponent, {
       data: user,
       disableClose: true,
