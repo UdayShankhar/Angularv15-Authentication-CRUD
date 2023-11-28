@@ -1,18 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UsersListComponent } from './users-list/users-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, LoginComponent, UsersListComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HttpClientModule,
+    MatSnackBarModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

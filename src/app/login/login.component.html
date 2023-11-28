@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-modal">
+    <div class="form-toggle">
+      <button id="login-toggle">Log In</button>
+    </div>
+
+    <div id="login-form">
+      <mat-form-field>
+        <mat-label>Username:</mat-label>
+        <input matInput type="text" formControlName="username" autofocus autocomplete="off">
+        <mat-error *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')">Username is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password:</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="off">
+        <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')">Password is required.</mat-error>
+      </mat-form-field>
+
+      <button type="button" class="btn login" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+    </div>
+  </div>
+</form>
