@@ -1,4 +1,8 @@
-<button (click)="addUser()">Add User</button>
+<div class="container">
+  <div class="header">
+<button mat-raised-button color="primary" (click)="addUser()">Add User</button>
+<button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </div>
 
 <div *ngIf="users && users.length > 0; else noData">
   <table mat-table [dataSource]="users" class="mat-elevation-z8">
@@ -42,3 +46,6 @@
 <ng-template #noData>
   <p>No data found.</p>
 </ng-template>
+</div>
+
+

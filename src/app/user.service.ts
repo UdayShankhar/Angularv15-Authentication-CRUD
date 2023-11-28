@@ -31,11 +31,11 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}/users/addUser`, user);
   }
 
-  updateUser(userId: string, user: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/users/${userId}`, user);
+  updateUser(userId: string, user: User): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/users/edit/${userId}`, user);
   }
 
   deleteUser(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/users/${userId}`);
+    return this.http.delete<any>(`${this.apiUrl}/users/delete/${userId}`);
   }
 }

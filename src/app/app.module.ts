@@ -14,8 +14,10 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { DeleteUserConfirmationComponent } from './delete-user-confirmation/delete-user-confirmation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
     UsersListComponent,
     PageNotFoundComponent,
     EditUserDialogComponent,
+    DeleteUserConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
     MatIconModule,
     MatTableModule,
     MatDialogModule,
+    MatButtonModule,
   ],
   providers: [
     {

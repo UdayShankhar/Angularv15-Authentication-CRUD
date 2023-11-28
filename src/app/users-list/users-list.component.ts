@@ -3,6 +3,8 @@ import { UserService } from '../user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { DeleteUserConfirmationComponent } from '../delete-user-confirmation/delete-user-confirmation.component';
+import { Router } from '@angular/router';
 
 interface User {
   _id?: string;
@@ -34,7 +36,8 @@ export class UsersListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.getAllUsers();
@@ -55,10 +58,11 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       width: '500px',
       data: { type: 'addUser' },
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((res) => {
-      // console.log(res)
+      this.users = [...this.users, res];
     });
   }
 
@@ -66,30 +70,41 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       width: '500px',
       data: { user, type: 'editUser' },
-    });
-
-    dialogRef.componentInstance.userUpdated.subscribe((updatedUserDetails) => {
-      const index = this.users.findIndex(
-        (u) => u._id === updatedUserDetails._id
-      );
-      if (index !== -1) {
-        this.users[index] = updatedUserDetails;
-      }
-      // console.log(this.users);
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((res) => {
-      // console.log(res);
+      const index = this.users.findIndex((u) => u?._id === res?._id);
+      if (index !== -1) {
+        this.users[index] = res;
+      }
+      const result = JSON.parse(JSON.stringify(this.users));
+      this.users = result;
     });
   }
 
   deleteUser(user: any): void {
-    // console.log('Delete user:', user);
+    const dialogRef = this.dialog.open(DeleteUserConfirmationComponent, {
+      data: user,
+      disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res?.deleteUser) {
+        this.userService.deleteUser(user?._id).subscribe((res) => {
+          this.users = this.users.filter((u) => u._id !== res?.user?._id);
+        });
+      }
+    });
   }
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
     });
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

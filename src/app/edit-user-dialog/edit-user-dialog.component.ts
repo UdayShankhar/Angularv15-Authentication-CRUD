@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: 'edit-user-dialog.component.html',
+  styleUrls: ['./edit-user-dialog.component.scss'],
 })
 export class EditUserDialogComponent {
   @Output() userUpdated = new EventEmitter<any>();
@@ -35,11 +36,25 @@ export class EditUserDialogComponent {
       this.userService.addUser(this.editUserForm.value).subscribe(
         (res) => {
           if (res) {
-            this.dialogRef.close(updatedUserDetails);
+            this.dialogRef.close(res?.user);
           }
         },
-        () => this.openSnackBar('Error while adding new user')
+        (error) => {
+          this.openSnackBar(error.error.message || 'Error while adding user');
+        }
       );
+    } else {
+      const userID = this.data;
+      this.userService
+        .updateUser(this.data?.user?._id, this.editUserForm.value)
+        .subscribe(
+          (res) => {
+            if (res) {
+              this.dialogRef.close(res?.user);
+            }
+          },
+          () => this.openSnackBar('Error while updating user')
+        );
     }
     this.userUpdated.emit(updatedUserDetails);
   }
