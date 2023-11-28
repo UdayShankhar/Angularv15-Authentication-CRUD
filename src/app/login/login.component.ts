@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(payload).subscribe(
         (res) => {
           this.displaySnackBar('Login successful');
+          this.router.navigateByUrl('/users');
         },
         () => {
           this.displaySnackBar('Login failed. Please check your credentials');
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit {
 
   displaySnackBar(message: string) {
     this.snackBar.open(message, 'Close', {
-      duration: 5000,
+      duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });

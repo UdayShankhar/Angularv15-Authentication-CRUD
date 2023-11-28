@@ -12,8 +12,18 @@ import { AuthInterceptor } from './auth.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UsersListComponent } from './users-list/users-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UsersListComponent, PageNotFoundComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UsersListComponent,
+    PageNotFoundComponent,
+    EditUserDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +34,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatInputModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatTableModule,
+    MatDialogModule,
   ],
   providers: [
     {
