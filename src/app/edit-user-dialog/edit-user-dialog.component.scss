@@ -1,4 +1,9 @@
 .form-container {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+
+.mdc-dialog__content{
+  padding-top: 14px;
 }

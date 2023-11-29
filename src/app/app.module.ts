@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import {MatCardModule} from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -41,6 +42,7 @@ import { DeleteUserConfirmationComponent } from './delete-user-confirmation/dele
     MatTableModule,
     MatDialogModule,
     MatButtonModule,
+    MatCardModule
   ],
   providers: [
     {
