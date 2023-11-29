@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <p>Are you sure you want to delete {{data?.name}}</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="deleteUser(false)">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="deleteUser(true)">Delete</button>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="deleteUser(false)">Cancel</button>
+  <button mat-raised-button color="warn" cdkFocusInitial (click)="deleteUser(true)">Delete</button>
 </div>

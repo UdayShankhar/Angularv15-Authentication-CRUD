@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output,OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
@@ -9,10 +9,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: 'edit-user-dialog.component.html',
   styleUrls: ['./edit-user-dialog.component.scss'],
 })
-export class EditUserDialogComponent {
+export class EditUserDialogComponent implements OnInit {
   @Output() userUpdated = new EventEmitter<any>();
   editUserForm: FormGroup;
-
+  formChanged = false;
   constructor(
     public dialogRef: MatDialogRef<EditUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,6 +28,12 @@ export class EditUserDialogComponent {
       city: [data?.user?.city || '', Validators.required],
     };
     this.editUserForm = this.fb.group(formConfig);
+  }
+
+  ngOnInit(): void {
+    this.editUserForm.valueChanges.subscribe(() => {
+      this.formChanged = true;
+    });
   }
 
   onSubmit(): void {

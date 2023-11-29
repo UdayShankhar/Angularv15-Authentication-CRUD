@@ -30,3 +30,11 @@ table {
   width: 40px;
   height: 40px;
 }
+
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
