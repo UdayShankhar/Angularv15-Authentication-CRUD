@@ -53,7 +53,7 @@ export class EditUserDialogComponent {
               this.dialogRef.close(res?.user);
             }
           },
-          () => this.openSnackBar('Error while updating user')
+          (error) => this.openSnackBar(error.error.message || 'Error while updating user')
         );
     }
     this.userUpdated.emit(updatedUserDetails);

@@ -38,7 +38,7 @@ export class UsersListComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.getAllUsers();
   }
@@ -62,7 +62,10 @@ export class UsersListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res) => {
-      this.users = [...this.users, res];
+      if (res) {
+        this.users = [...this.users, res];
+        this.openSnackBar('User added successfully');
+      }
     });
   }
 
@@ -74,12 +77,15 @@ export class UsersListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res) => {
-      const index = this.users.findIndex((u) => u?._id === res?._id);
-      if (index !== -1) {
-        this.users[index] = res;
+      if (res) {
+        const index = this.users.findIndex((u) => u?._id === res?._id);
+        if (index !== -1) {
+          this.users[index] = res;
+        }
+        const result = JSON.parse(JSON.stringify(this.users));
+        this.users = result;
+        this.openSnackBar('User updated successfully');
       }
-      const result = JSON.parse(JSON.stringify(this.users));
-      this.users = result;
     });
   }
 
@@ -92,6 +98,7 @@ export class UsersListComponent implements OnInit {
       if (res?.deleteUser) {
         this.userService.deleteUser(user?._id).subscribe((res) => {
           this.users = this.users.filter((u) => u._id !== res?.user?._id);
+          this.openSnackBar('User deleted successfully');
         });
       }
     });
