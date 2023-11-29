@@ -11,31 +11,49 @@ interface User {
   city?: string;
 }
 
+interface UserData {
+  _id: string;
+  name: string;
+  phoneNumber: string;
+  address: string;
+  state: string;
+  city: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface UserResponse {
+  total: number;
+  users: UserData[];
+}
+
+interface AddEditDeleteUserResponse {
+  message: string;
+  user: UserData;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users/allUsers`);
+  getUsers(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/users/allUsers`);
   }
 
-  getUserById(userId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/users/${userId}`);
+  addUser(user: User): Observable<AddEditDeleteUserResponse> {
+    return this.http.post<AddEditDeleteUserResponse>(`${this.apiUrl}/users/addUser`, user);
   }
 
-  addUser(user: User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users/addUser`, user);
+  updateUser(userId: string, user: User): Observable<AddEditDeleteUserResponse> {
+    return this.http.put<AddEditDeleteUserResponse>(`${this.apiUrl}/users/edit/${userId}`, user);
   }
 
-  updateUser(userId: string, user: User): Observable<any> {
-    return this.http.put(`${this.apiUrl}/users/edit/${userId}`, user);
-  }
-
-  deleteUser(userId: string | unknown): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/delete/${userId}`);
+  deleteUser(userId: string | unknown): Observable<AddEditDeleteUserResponse> {
+    return this.http.delete<AddEditDeleteUserResponse>(`${this.apiUrl}/users/delete/${userId}`);
   }
 }
