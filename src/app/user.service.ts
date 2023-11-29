@@ -53,7 +53,7 @@ export class UserService {
     return this.http.put<AddEditDeleteUserResponse>(`${this.apiUrl}/users/edit/${userId}`, user);
   }
 
-  deleteUser(userId: string | unknown): Observable<AddEditDeleteUserResponse> {
+  deleteUser(userId: string): Observable<AddEditDeleteUserResponse> {
     return this.http.delete<AddEditDeleteUserResponse>(`${this.apiUrl}/users/delete/${userId}`);
   }
 }

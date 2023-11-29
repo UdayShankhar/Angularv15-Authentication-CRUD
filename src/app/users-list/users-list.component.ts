@@ -98,7 +98,7 @@ export class UsersListComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe((res) => {
-      if (res?.deleteUser) {
+      if (res?.deleteUser && user?._id) {
         this.userService.deleteUser(user?._id).subscribe((res) => {
           this.users = this.users.filter((u) => u._id !== res?.user?._id);
           this.openSnackBar('User deleted successfully');
