@@ -18,3 +18,15 @@ table {
   width: 100%;
   overflow-x: auto;
 }
+
+.spinner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mat-spinner {
+  width: 40px;
+  height: 40px;
+}

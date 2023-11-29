@@ -24,6 +24,7 @@ interface User {
   styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
+  loader = false;
   users: User[] = [];
   displayedColumns: string[] = [
     'name',
@@ -44,9 +45,11 @@ export class UsersListComponent implements OnInit {
   }
 
   getAllUsers() {
+    this.loader = true;
     this.userService.getUsers().subscribe(
       (response) => {
         this.users = response?.users;
+        this.loader = false;
       },
       () => {
         this.openSnackBar('Error while fetching users');

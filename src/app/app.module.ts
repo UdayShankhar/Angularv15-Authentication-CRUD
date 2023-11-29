@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserConfirmationComponent } from './delete-user-confirmation/delete-user-confirmation.component';
 @NgModule({
@@ -42,7 +43,8 @@ import { DeleteUserConfirmationComponent } from './delete-user-confirmation/dele
     MatTableModule,
     MatDialogModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -53,4 +55,4 @@ import { DeleteUserConfirmationComponent } from './delete-user-confirmation/dele
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
